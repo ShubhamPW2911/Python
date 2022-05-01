@@ -1,0 +1,259 @@
+import math
+import sys
+
+mat1 = []
+mat2 = []
+
+
+def input_matrix():
+    global mat1
+    global mat2
+
+    row1=int(input('Enter row no. of Matrix 1: '))
+    col1=int(input('Enter col no. of Matrix 1: '))
+
+    for i in range(row1):
+        temp=[]
+        for j in range(col1):
+            num=int(input(f'Enter Row{i} Col{j} value: '))
+            temp.append(num)
+        mat1.append(temp)
+
+    print('Matrix - 1 values added successfully')
+    print()
+
+    # Matrix 2
+    row2 = int(input('Enter row no. of Matrix 2: '))
+    col2 = int(input('Enter col no. of Matrix 2: '))
+
+    for i in range(row2):
+        temp = []
+        for j in range(col2):
+            num = int(input(f'Enter Row{i} Col{j} value: '))
+            temp.append(num)
+        mat2.append(temp)
+    print('Matrix - 2 values added successfully')
+    print()
+
+    # display
+    print('Matrix - 1: ')
+    for i in range(len(mat1)):
+        for j in range(len(mat1[0])):
+            print(mat1[i][j], end=' ')
+        print()
+
+    print()
+
+    print('Matrix - 2: ')
+    for i in range(len(mat2)):
+        for j in range(len(mat2[0])):
+            print(mat2[i][j], end=' ')
+        print()
+
+def checkSymmetric(m):
+    if len(m) == len(m[0]):
+        return True
+    else:
+        return False
+
+def checkSymmetricTranspose(m1):
+
+    if checkSymmetric(m1):
+        isM1Sym=True
+        m1_trans = [[0 for x in range(len(m1))] for y in range(len(m1[0]))]
+
+        # transpose
+        for i in range(len(m1[0])):
+            for j in range(len(m1)):
+                m1_trans[i][j] = m1[j][i]
+
+        # check for mat1
+        for i in range(len(m1_trans)):
+            for j in range(len(m1_trans[0])):
+                if m1[i][j]!=m1_trans[i][j]:
+                    isM1Sym=False
+                    break
+    else:
+        isM1Sym=False
+
+    return isM1Sym
+
+def checkBinary(m):
+    is_binary=True
+    for i in range(len(m)):
+        for j in range(len(m[0])):
+            if m[i][j] <= -1 or m[i][j] >= 2:
+                is_binary=False
+
+    return is_binary
+
+
+def addition(m1, m2):
+    m3=[]
+
+    for i in range(len(m1)):
+        temp=[]
+        for j in range(len(m1[0])):
+            temp.append(m1[i][j]+m2[i][j])
+        m3.append(temp)
+
+    # print
+    for i in range(len(m3)):
+        for j in range(len(m3[0])):
+            print(m3[i][j], end=' ')
+        print()
+
+def subtraction(m1, m2):
+    m3=[]
+
+    for i in range(len(m1)):
+        temp=[]
+        for j in range(len(m1[0])):
+            temp.append(m1[i][j]-m2[i][j])
+        m3.append(temp)
+
+    # print
+    for i in range(len(m3)):
+        for j in range(len(m3[0])):
+            print(m3[i][j], end=' ')
+        print()
+
+def multiplication(m1, m2):
+    s=0
+    m3=[]
+    if len(m1[0]) == len(m2) and len(m1) == len(m2[0]):
+        for i in range(len(m1)):
+            temp=[]
+            for j in range(len(m2[0])):
+                for k in range(len(m2)):
+                    s=s+m1[i][k]*m2[k][j]
+                temp.append(s)
+                s=0
+            m3.append(temp)
+        # print
+        for i in range(len(m3)):
+            for j in range(len(m3[0])):
+                print(m3[i][j], end=' ')
+            print()
+    else:
+        print('Cannot perform Multiplication, Mat1 Row != Mat2 Col and Mat1 Col!= Mat2 Row')
+
+def transpose(m1, m2):
+    m1_trans=[[0 for x in range(len(m1))] for y in range(len(m1[0]))]
+    m2_trans=[[0 for x in range(len(m2))] for y in range(len(m2[0]))]
+
+    for i in range(len(m1[0])):
+        for j in range(len(m1)):
+            m1_trans[i][j]=m1[j][i]
+
+    for i in range(len(m2[0])):
+        for j in range(len(m2)):
+            m2_trans[i][j]=m2[j][i]
+
+    # print
+    print('Matrix - 1 Transpose: ')
+    for i in range(len(m1_trans)):
+        for j in range(len(m1_trans[0])):
+            print(m1_trans[i][j], end=' ')
+        print()
+
+    print('Matrix - 2 Transpose: ')
+    for i in range(len(m2_trans)):
+        for j in range(len(m2_trans[0])):
+            print(m2_trans[i][j], end=' ')
+        print()
+
+def divide(m1, m2):
+    m3=[]
+
+    for i in range(len(m1)):
+        temp=[]
+        for j in range(len(m1[0])):
+            try:
+                temp.append(round(m1[i][j]/m2[i][j], 2))
+            except ArithmeticError:
+                temp.append('INFINITY')
+        m3.append(temp)
+
+    # print
+    for i in range(len(m3)):
+        for j in range(len(m3[0])):
+            print(m3[i][j], end=' ')
+        print()
+
+if __name__ == '__main__':
+    # input
+    input_matrix()
+
+    # check symmetric
+    res = checkSymmetricTranspose(mat1)
+    if res:
+        print('Matrix - 1 is Symmetric')
+    else:
+        print('Matrix - 1 is Not Symmetric')
+
+    res = checkSymmetricTranspose(mat2)
+    if res:
+        print('Matrix - 2 is Symmetric')
+    else:
+        print('Matrix - 2 is Not Symmetric')
+
+    # check binary
+    res = checkBinary(mat1)
+    if res:
+        print('Matrix - 1 is Binary')
+    else:
+        print('Matrix - 1 is Not Binary')
+
+    res = checkBinary(mat2)
+    if res:
+        print('Matrix - 2 is Binary')
+    else:
+        print('Matrix - 2 is Not Binary')
+
+    # perform operations
+    print('\n------Menu------\n')
+    while True:
+        print('1. Addition')
+        print('2. Subtraction')
+        print('3. Multiplication')
+        print('4. Transpose')
+        print('5. Division')
+        print('6. Exit\n')
+
+        ch = int(input('Enter the choice: '))
+
+        if ch == 1:
+            if checkSymmetric(mat1) is True and checkSymmetric(mat2) is True:
+                print('Addition: ')
+                addition(mat1, mat2)
+            else:
+                print('Cannot perform Addition, Matrices Rows and Columns are not same.')
+            print('\n')
+
+        elif ch == 2:
+            if checkSymmetric(mat1) is True and checkSymmetric(mat2) is True:
+                print('Subtraction: ')
+                subtraction(mat1, mat2)
+            else:
+                print('Cannot perform Subtraction, Matrices Rows and Columns are not same.')
+            print('\n')
+
+        elif ch == 3:
+            print('Multiplication: ')
+            multiplication(mat1, mat2)
+            print('\n')
+
+        elif ch == 4:
+            transpose(mat1, mat2)
+            print('\n')
+
+        elif ch == 5:
+            if checkSymmetric(mat1) is True and checkSymmetric(mat2) is True:
+                print('Division: ')
+                divide(mat1, mat2)
+            else:
+                print('Cannot perform Division, Matrices Rows and Columns are not same.')
+            print('\n')
+        else:
+            sys.exit(0)
