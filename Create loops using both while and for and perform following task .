@@ -1,0 +1,34 @@
+arr=[]
+
+def usingWhile(a):
+    res=[]
+    start=0
+    end=len(a)-1
+
+    while start<len(arr) and end>=0:
+        res.append(arr[start]+arr[end])
+        start=start+1
+        end=end-1
+    print(res)
+
+def usingFor(a):
+    res = []
+    end = len(a) - 1
+
+    for start in range(len(arr)):
+        res.append(arr[start]+arr[end])
+        end=end-1
+    print(res)
+
+if __name__ == '__main__':
+    size = int(input('Enter the size of array: '))
+
+    for i in range(size):
+        num = int(input(f'Enter num{i} :'))
+        arr.append(num)
+
+    print('1. Using While Loop')
+    usingWhile(arr)
+
+    print('2. Using For Loop')
+    usingFor(arr)
