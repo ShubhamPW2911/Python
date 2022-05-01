@@ -1,0 +1,139 @@
+class student:
+    def __init__(self, sid, name, age, math_marks, sci_marks, eng_marks):
+        self.sid = sid
+        self.name = name
+        self.age = age
+        self.math_marks = math_marks
+        self.sci_marks = sci_marks
+        self.eng_marks = eng_marks
+
+
+students = []
+
+def putData():
+    while True:
+        try:
+            total = int(input('Enter total students: '))
+            if total <= 0:
+                raise ValueError('Please input Positive Integers only.')
+            break
+        except ValueError:
+            print('Please input Positive Integers only.')
+            continue
+    print()
+
+    for i in range(total):
+        print(f'For Student {i+1}:')
+        # id
+        while True:
+            try:
+                sid = int(input('Enter student id: '))
+                if sid <= 0:
+                    raise ValueError('Please input Positive Integers only.')
+                break
+            except ValueError:
+                print('Please input Positive Integers only.')
+                continue
+
+        # name
+        while True:
+            try:
+                name = input('Enter student name: ')
+                if not name.isalpha():
+                    raise ValueError('Please enter only Alphabetic String.')
+                elif name.isnumeric():
+                    raise ValueError('Please enter only Alphabetic String')
+                break
+            except ValueError as ve:
+                print(ve)
+                continue
+
+        # age
+        while True:
+            try:
+                age = int(input('Enter student age: '))
+                if age <= 0:
+                    raise ValueError('Invalid Age!')
+                break
+            except ValueError:
+                print('Invalid Age!')
+                continue
+
+        # math_marks
+        while True:
+            try:
+                math_marks = int(input('Enter math marks (0-100): '))
+                if math_marks <= 0 or math_marks > 100:
+                    raise ValueError('Marks must be >= 0 and <=100')
+                break
+            except ValueError:
+                print('Invalid Marks!')
+                continue
+
+        # sci_marks
+        while True:
+            try:
+                sci_marks = int(input('Enter science marks (0-100): '))
+                if sci_marks <= 0 or sci_marks > 100:
+                    raise ValueError('Marks must be >= 0 and <=100')
+                break
+            except ValueError:
+                print('Invalid Marks!')
+                continue
+
+        # eng_marks
+        while True:
+            try:
+                eng_marks = int(input('Enter english marks (0-100): '))
+                if eng_marks <= 0 or eng_marks > 100:
+                    raise ValueError('Marks must be >= 0 and <=100')
+                break
+            except ValueError:
+                print('Invalid Marks!')
+                continue
+
+        students.append(student(sid, name, age, math_marks, sci_marks, eng_marks))
+        print()
+
+
+def calculate():
+    status = ''
+    grade = ''
+    percentage = 0
+
+    print('Result: ')
+    print('==========================================================')
+    print()
+
+    for i in range(len(students)):
+        if students[i].math_marks > 50 and students[i].sci_marks > 50 and students[i].eng_marks > 50:
+            status = 'Pass'
+        else:
+            status = 'Fail'
+            grade = 'D'
+
+        percentage = (students[i].math_marks + students[i].sci_marks + students[i].eng_marks) / 3.0
+
+        if status == 'Pass':
+            if percentage >= 75:
+                grade = 'A'
+            elif 60 <= percentage < 75:
+                grade = 'B'
+            elif 50 <= percentage < 60:
+                grade = 'C'
+            else:
+                grade = 'D'
+
+        # print
+        print(f'Student ID: {students[i].sid}')
+        print(f'Student Name: {students[i].name}')
+        print(f'Student Age: {students[i].age}')
+        print(f'Student Status: {status}')
+        print(f'Student Grade: {grade}')
+        print(f'Student Percentage: {round(percentage, 2)}')
+        print()
+        status=''
+
+if __name__ == '__main__':
+    putData()
+    calculate()
