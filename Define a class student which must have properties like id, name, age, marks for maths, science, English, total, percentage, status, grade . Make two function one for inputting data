@@ -1,0 +1,152 @@
+# list containing some elements
+lst=['laptop', 'wireless mouse', 'wireless keyboard', 'headphone']
+
+def pushData():
+    data=input('Enter the data to insert: ')
+    lst.append(data)
+    print(f'{data} inserted successfully..')
+    display()
+
+def popData():
+    if len(lst) == 0:
+        print('List is empty.')
+    else:
+        data=lst.pop(len(lst)-1)
+        print(f'{data} popped successfully..')
+        display()
+
+def enqueue():
+    pushData()
+
+def dequeue():
+    if len(lst)==0:
+        print('List is empty.')
+    else:
+        data=lst.pop(0)
+        print(f'{data} deleted successfully..')
+        display()
+
+def display():
+    print(lst)
+    print()
+
+if __name__ == '__main__':
+
+    while True:
+        print('1. Push Data')
+        print('2. Pop Data')
+        print('3. Enqueue')
+        print('4. Dequeue')
+        print('5. Display')
+        print('6. Exit')
+
+        ch=int(input('Enter the choice: '))
+
+        if ch==1:
+            pushData()
+        elif ch==2:
+            popData()
+        elif ch==3:
+            enqueue()
+        elif ch==4:
+            dequeue()
+        elif ch==5:
+            display()
+        elif ch==6:
+            exit(0)
+
+        print()
+
+# Using pointers
+#
+# # size
+# lst=[None] * 100
+#
+# lst[0]='laptop'
+# lst[1]='wireless mouse'
+# lst[2]='wireless keyboard'
+# lst[3]='headphone'
+# top=3
+# front, rear= 0, 3
+#
+# def addData():
+#     global top
+#
+#     data=input('Enter the data to insert: ')
+#     top=top+1
+#     lst[top]=data
+#
+#     print(f'{data} inserted successfully..')
+#     display(0, top)
+#
+# def popData():
+#     global top
+#
+#     if top==-1:
+#         print('List is empty.')
+#     else:
+#         data=lst[top]
+#         top=top-1
+#         print(f'{data} popped successfully..')
+#         display(0, top)
+#
+# def enqueue():
+#     global rear, front
+#
+#     data = input('Enter the data to insert: ')
+#     rear = rear + 1
+#     lst[rear] = data
+#
+#     print(f'{data} inserted successfully..')
+#     display(front, rear)
+#
+# def dequeue():
+#     global front, rear
+#
+#     if front>rear:
+#         print('List is empty.')
+#     else:
+#         data=lst[front]
+#         front=front+1
+#         print(f'{data} deleted successfully..')
+#         display(front, rear)
+#
+# def display(start, end):
+#     print(lst[start:end+1])
+#     print()
+#
+# if __name__ == '__main__':
+#
+#     while True:
+#         print('1. Push Data')
+#         print('2. Pop Data')
+#         print('3. Enqueue')
+#         print('4. Deque')
+#         print('5. Display')
+#         print('6. Exit')
+#
+#         ch=int(input('Enter the choice: '))
+#
+#         if ch==1:
+#             addData()
+#         elif ch==2:
+#             popData()
+#         elif ch==3:
+#             enqueue()
+#         elif ch==4:
+#             dequeue()
+#         elif ch==5:
+#             print('1. Display with respect to Stack')
+#             print('2. Display with respect to Queue')
+#             ch1=int(input('Enter the choice'))
+#
+#             if ch1==1:
+#                 display(0, top)
+#             else:
+#                 display(front, rear)
+#
+#         elif ch==6:
+#             exit(0)
+#
+#         print()
+#
